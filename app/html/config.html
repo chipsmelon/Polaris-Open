@@ -978,7 +978,7 @@
         })
 
         presets.forEach(x => {
-            $('#curvePresets').append(`<option value="${x.name}">${x.name}</option>`)
+            $('#curvePresets').append(`<option value="${x.name}">${x.name}</option>`) // WARNING: this could become XSS (hacking) if you added user-made custom presets
         })
 
         let foundPreset = presets.find(x => x.name != data.guild.name && JSON.stringify([x.curve, x.round, x.bestRange]) == JSON.stringify([db.curve, db.rounding, [db.gain.min, db.gain.max]])) || presets[0]
@@ -1053,7 +1053,7 @@
             if (!extra) columns = columns.filter(x => !x.extra)
 
             element.empty();
-            element.append(columns.map(x => `<div col="${x.id}"><p><b>${x.name}</b></p></div>`))
+            element.append(columns.map(x => `<div col="${x.id}"><p><b>${x.name}</b></p></div>`)) // WARNING: be weary of XSS (hacking) because of this line if you for some reason let users add columns
             
             levels.forEach(lvl => {
 
@@ -1285,7 +1285,7 @@
                 else $(`#roleMultiplierSelect option[value=${boost.id}]`).prop('hidden', true)
 
                 $('#roleMultipliers div[col="boost"]').append(`<p class="roleMultiplierAmount numberinput" roleID="${boost.id}" min="0" max="100" decimals="4" default="1" tabindex="-1" contenteditable>${+boost.boost}x</p>`)
-                $('#roleMultipliers div[col="role"]').append(`<p class="longname" style="color: ${foundRole.color == "#000000" ? "var(--defaultrolecol)" : foundRole.color}">${foundRole.name}</p>`)
+                $('#roleMultipliers div[col="role"]').append($(`<p class="longname" style="color: ${foundRole.color == "#000000" ? "var(--defaultrolecol)" : foundRole.color}"></p>`).text(foundRole.name)) // sneaky one
                 $('#roleMultipliers div[col="delete"]').append(`<p class="deleteRow deleteRoleMultiplier" tabindex="0" roleID="${boost.id}">🗑️</p>`)
             })
             $('#roleMultiplierCount').html(roleMultipliers.length)
