@@ -1,14 +1,14 @@
 {
-  "test_server_ids": ["858465907060113428"],
+  "test_server_ids": ["12345678"],
 
-  "developer_ids": ["815350320959193128"],
+  "developer_ids": ["12345678"],
 
-  "lockBotToDevOnly": true,
+  "lockBotToDevOnly": false,
   
   "enableWebServer": true,
   "serverPort": 6880,
   "siteURL": "http://localhost:6880",
   
-  "changelogURL": "https://chipsmelon.github.io",
-  "supportURL": "https://chipsmelon.github.io"
+  "changelogURL": "",
+  "supportURL": ""
 }
