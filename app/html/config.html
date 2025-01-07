@@ -978,7 +978,7 @@
         })
 
         presets.forEach(x => {
-            $('#curvePresets').append(`<option value="${x.name}">${x.name}</option>`) // WARNING: this could become XSS (hacking) if you added user-made custom presets
+            $('#curvePresets').append($(`<option></option>`).val(x.name).text(x.name))
         })
 
         let foundPreset = presets.find(x => x.name != data.guild.name && JSON.stringify([x.curve, x.round, x.bestRange]) == JSON.stringify([db.curve, db.rounding, [db.gain.min, db.gain.max]])) || presets[0]
