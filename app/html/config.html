@@ -919,7 +919,7 @@
         $('.serverName').text(data.guild.name)
         $('.serverMembers').text(commafy(data.guild.members || "?") + " member" + (data.guild.members == 1 ? "" : "s"))
         $('.serverIcon').attr('src', data.guild.icon || "/assets/avatar.png")
-        $('#otherServers').append(data.ownedServers.map(x => `<option value="${x.id}">${x.name}</option>`))
+        $('#otherServers').append(data.ownedServers.map(x => $("<option></option>").val(x.id).text(x.name)))
         
         // fill in inputs with current values
         $('input[db], select[db]').each(function() {
@@ -1191,7 +1191,7 @@
 
         // role selectors
         data.roles.forEach(x => {
-            let roleOption = $(`<option value="${x.id}">${x.name}</option>`)
+            let roleOption = $("<option></option>").val(x.id).text(x.name)
             roleOption.css("color", x.color == "#000000" ? "var(--defaultrolecol)" : x.color)
 
             if (!x.managed) appendRoleSelect('#rewardRoleSelect', roleOption, x, true, rewards.some(r => r.id == x.id))
