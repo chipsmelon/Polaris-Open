@@ -1161,9 +1161,11 @@
                 let foundRole = data.roles.find(x => x.id == reward.id)
                 if (!foundRole) return
                 else $(`#rewardRoleSelect option[value=${reward.id}]`).prop('hidden', true)
+                const nameElement = $(`<p class="longname" style="color: ${foundRole.color == "#000000" ? "var(--defaultrolecol)" : foundRole.color}">`);
+                nameElement.text(foundRole.name);
 
                 $('#rewards div[col="lvl"]').append(`<p class="rewardLevel numberinput" tabindex="-1" roleID="${reward.id}" min="1" max="1000" default="10" contenteditable>${reward.level}</p>`)
-                $('#rewards div[col="role"]').append(`<p class="longname" style="color: ${foundRole.color == "#000000" ? "var(--defaultrolecol)" : foundRole.color}">${foundRole.name}</p>`)
+                $('#rewards div[col="role"]').append(nameElement);
                 $('#rewards div[col="keep"]').append(`<p class="toggleRow" tr="keep" tabindex="0" roleID="${reward.id}" style="color: ${reward.keep ? "lime" : "nah"}">${reward.keep ? "Yes" : "No"}${reward.noSync && !excludeEnabled ? "*" : ""}</p>`)
                 $('#rewards div[col="exclude"]').append(`<p class="toggleRow" tr="noSync" tabindex="0" roleID="${reward.id}" style="color: ${reward.noSync ? "red" : "lime"}">${reward.noSync ? "No" : "Yes"}</p>`)
                 $('#rewards div[col="delete"]').append(`<p class="deleteRow deleteReward" tabindex="0" roleID="${reward.id}">🗑️</p>`)
@@ -1284,8 +1286,11 @@
                 if (!foundRole) return
                 else $(`#roleMultiplierSelect option[value=${boost.id}]`).prop('hidden', true)
 
+                const nameElement = $(`<p class="longname" style="color: ${foundRole.color == "#000000" ? "var(--defaultrolecol)" : foundRole.color}">`);
+                nameElement.text(foundRole.name);
+                
                 $('#roleMultipliers div[col="boost"]').append(`<p class="roleMultiplierAmount numberinput" roleID="${boost.id}" min="0" max="100" decimals="4" default="1" tabindex="-1" contenteditable>${+boost.boost}x</p>`)
-                $('#roleMultipliers div[col="role"]').append(`<p class="longname" style="color: ${foundRole.color == "#000000" ? "var(--defaultrolecol)" : foundRole.color}">${foundRole.name}</p>`)
+                $('#roleMultipliers div[col="role"]').append(nameElement)
                 $('#roleMultipliers div[col="delete"]').append(`<p class="deleteRow deleteRoleMultiplier" tabindex="0" roleID="${boost.id}">🗑️</p>`)
             })
             $('#roleMultiplierCount').html(roleMultipliers.length)
